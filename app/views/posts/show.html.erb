@@ -6,5 +6,10 @@
      <br>
      <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-warning' %>
      <%= link_to "Delete Post", @post, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
+     <br>
+     <br>
+     <p><%=  @ad.title  %></p>
+     <p><%=  @ad.body  %></p>
+     <p>$<%=  @ad.price  %></p>
    </div>
  </div>
