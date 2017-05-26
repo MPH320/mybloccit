@@ -27,6 +27,19 @@ require 'random_data'
    )
  end
  
+ 50.times do
+
+    Advertisement.create!(
+     title:  Faker::Company.buzzword,
+     body:   Faker::Company.catch_phrase,
+     price: rand(10...100)
+    )
+   
+ 
+ end
+ 
+ advertisements = Advertisement.all
+ 
   puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
