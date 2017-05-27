@@ -19,6 +19,7 @@ class AdvertisementsController < ApplicationController
      @advertisement = Advertisement.new
      @advertisement.title = params[:advertisement][:title]
      @advertisement.body = params[:advertisement][:body]
+     @advertisement.url = params[:advertisement][:url]
      @advertisement.price = params[:advertisement][:price]
  
      if @advertisement.save
@@ -34,6 +35,7 @@ class AdvertisementsController < ApplicationController
      @advertisement = Advertisement.find(params[:id])
      @advertisement.title = params[:advertisement][:title]
      @advertisement.body = params[:advertisement][:body]
+     @advertisement.url = params[:advertisement][:url]
      @advertisement.price = params[:advertisement][:price]
  
      if @advertisement.save

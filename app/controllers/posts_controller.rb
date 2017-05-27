@@ -1,3 +1,5 @@
+include Faker
+
 class PostsController < ApplicationController
   def index
     @posts = Post.all
@@ -6,6 +8,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @ad = Advertisement.all.sample
+    @image = Faker::Fillmurray.image
   end
 
   def new

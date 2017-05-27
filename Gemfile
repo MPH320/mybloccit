@@ -28,5 +28,5 @@ source 'https://rubygems.org'
  # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
  gem 'turbolinks'
  gem 'bootstrap-sass'
- gem 'faker'
- gem 'marky_markov', '~> 0.3.5'
+ gem 'faker', github: 'stympy/faker'
+ gem 'image_suckr'

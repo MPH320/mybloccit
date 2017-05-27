@@ -4,6 +4,7 @@
 
    <div class="col-md-8">
      <p><%= @advertisement.body %></p>
+     <p><%= @advertisement.url %></p>
      <p>$<%= @advertisement.price %></p>
      <br>
      <%= link_to "Edit", edit_advertisement_path(@advertisement), class: 'btn btn-warning' %>

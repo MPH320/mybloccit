@@ -6,15 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 include Faker
-require 'marky_markov'
-markov = MarkyMarkov::TemporaryDictionary.new
-markov.parse_file "zenfile.txt"
 require 'random_data'
+
 
 50.times do
    Post.create!(
      title:  Faker::Company.catch_phrase,
-     body:   markov.generate_5_sentences
+     body:   Faker::Friends.quote
    )
  end
  
@@ -23,15 +21,16 @@ require 'random_data'
  100.times do
    Comment.create!(
      post: posts.sample,
-     body: Faker::ChuckNorris.fact
+     body: Faker::Hacker.say_something_smart
    )
  end
  
  50.times do
 
     Advertisement.create!(
-     title:  Faker::Company.buzzword,
+     title:  Faker::ChuckNorris.fact,
      body:   Faker::Company.catch_phrase,
+     url:    Faker::Internet.url,
      price: rand(10...100)
     )
    
