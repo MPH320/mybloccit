@@ -7,11 +7,21 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 include Faker
 require 'random_data'
+require 'marky_markov'
+markov = MarkyMarkov::TemporaryDictionary.new
+markov.parse_file "zenfile.txt"
 
+15.times do
+   Topic.create!(
+     name:        Faker::Company.catch_phrase,
+     description: markov.generate_5_sentences
+   )
+ end
+ topics = Topic.all
 
 50.times do
    Post.create!(
-     title:  Faker::Company.catch_phrase,
+     title:  Faker::Hipster.sentence,
      body:   Faker::Friends.quote
    )
  end
@@ -28,8 +38,8 @@ require 'random_data'
  50.times do
 
     Advertisement.create!(
-     title:  Faker::ChuckNorris.fact,
-     body:   Faker::Company.catch_phrase,
+     title:  Faker::Cat.registry,
+     body:   Faker::ChuckNorris.fact,
      url:    Faker::Internet.url,
      price: rand(10...100)
     )
@@ -39,6 +49,7 @@ require 'random_data'
  
  advertisements = Advertisement.all
  
-  puts "Seed finished"
+ puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ markov.clear!

@@ -8,13 +8,13 @@ source 'https://rubygems.org'
    gem 'pg'
  end
  
- # #2
  group :development do
    gem 'sqlite3'
  end
  
  group :development, :test do
    gem 'rspec-rails', '~> 3.0'
+   gem 'shoulda'
  end
  
  # Use SCSS for stylesheets
@@ -29,4 +29,4 @@ source 'https://rubygems.org'
  gem 'turbolinks'
  gem 'bootstrap-sass'
  gem 'faker', github: 'stympy/faker'
- gem 'image_suckr'
+ gem 'marky_markov', '~> 0.3.5'
