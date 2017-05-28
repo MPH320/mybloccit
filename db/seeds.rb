@@ -21,6 +21,7 @@ markov.parse_file "zenfile.txt"
 
 50.times do
    Post.create!(
+     topic:  topics.sample,
      title:  Faker::Hipster.sentence,
      body:   Faker::Friends.quote
    )
