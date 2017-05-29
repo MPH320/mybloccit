@@ -8,13 +8,16 @@
      <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
      <br><br><br>
       <div class="ad">
-      <a class="murray" href="https://www.michelangelopereira.com">
+      <a href="https://www.michelangelopereira.com">
        <img class="murray" src="<%=  @image  %>">
-         <p>&nbsp;<%=  @ad.title  %></p>
-         <p>&nbsp;<%=  @ad.body  %> </p>
-         <p>&nbsp;$<%=  @ad.price  %></p>
-         <p>&nbsp;<%=  @ad.url  %> </p>
-      </a>
+       
+         <p class="ad-text">&nbsp;<%=  @ad.title  %></p>
+         <p class="ad-text">&nbsp;<%=  @ad.body  %> </p>
+         <p class="ad-text">&nbsp;$<%=  @ad.price  %></p>
+         <p class="ad-text">&nbsp;<%=  @ad.url  %> </p>
+        
+         
+       </a>
       </div>
    </div>
  </div>

@@ -19,7 +19,18 @@ markov.parse_file "zenfile.txt"
  end
  topics = Topic.all
 
-50.times do
+10.times do
+   SponsoredPost.create!(
+     topic:  topics.sample,
+     title:  Faker::Hipster.sentence,
+     body:   Faker::Hacker.say_something_smart,
+     price: rand(10...100)
+   )
+ end
+ 
+ sponsored_post = SponsoredPost.all
+ 
+ 50.times do
    Post.create!(
      topic:  topics.sample,
      title:  Faker::Hipster.sentence,
@@ -32,6 +43,13 @@ markov.parse_file "zenfile.txt"
  100.times do
    Comment.create!(
      post: posts.sample,
+     body: Faker::Hacker.say_something_smart
+   )
+ end
+ 
+ 20.times do
+   Comment.create!(
+     post: sponsored_post.sample,
      body: Faker::Hacker.say_something_smart
    )
  end
@@ -51,6 +69,7 @@ markov.parse_file "zenfile.txt"
  advertisements = Advertisement.all
  
  puts "Seed finished"
+ puts "#{SponsoredPost.count} sponsored posts created"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
  markov.clear!
