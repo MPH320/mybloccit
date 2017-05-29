@@ -14,7 +14,7 @@ markov.parse_file "zenfile.txt"
 15.times do
    Topic.create!(
      name:        Faker::Company.catch_phrase,
-     description: markov.generate_5_sentences
+     description: Faker::Hacker.say_something_smart
    )
  end
  topics = Topic.all
@@ -23,7 +23,7 @@ markov.parse_file "zenfile.txt"
    SponsoredPost.create!(
      topic:  topics.sample,
      title:  Faker::Hipster.sentence,
-     body:   Faker::Hacker.say_something_smart,
+     body:   markov.generate_5_sentences,
      price: rand(10...100)
    )
  end
@@ -34,7 +34,7 @@ markov.parse_file "zenfile.txt"
    Post.create!(
      topic:  topics.sample,
      title:  Faker::Hipster.sentence,
-     body:   Faker::Friends.quote
+     body:   markov.generate_5_sentences
    )
  end
  
@@ -43,7 +43,7 @@ markov.parse_file "zenfile.txt"
  100.times do
    Comment.create!(
      post: posts.sample,
-     body: Faker::Hacker.say_something_smart
+     body: Faker::Friends.quote
    )
  end
  
