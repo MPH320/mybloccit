@@ -5,8 +5,8 @@
      <% @topic.SponsoredPosts.each do |sponsored_post| %>
        <div class="media">
          <div class="media-body">
-           <h4 class="media-heading sub-titles sponsored">
-             <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %>
+           <h4 class="media-heading sub-titles">
+             <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %> - Sponsored
            </h4>
            <small>
              submitted <%= time_ago_in_words(sponsored_post.created_at) %> ago <br>

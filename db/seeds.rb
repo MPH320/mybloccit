@@ -49,7 +49,7 @@ markov.parse_file "zenfile.txt"
  
  20.times do
    Comment.create!(
-     post: sponsored_post.sample,
+     sponsored_post: sponsored_post.sample,
      body: Faker::Hacker.say_something_smart
    )
  end
