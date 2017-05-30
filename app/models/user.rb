@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
     
     has_many :posts
     has_many :sponsored_posts
+    has_many :comments
     
     before_save { 
          

@@ -2,10 +2,45 @@
    <small>
      submitted <%= time_ago_in_words(@sponsored_post.created_at) %> ago by <%= @sponsored_post.user.name %><br><br>
    </small>
- <br>
+
  <div class="row">
    <div class="col-md-8">
-     <p><%= @sponsored_post.body %></p>
+     <p class="sub-titles"><%= @sponsored_post.body %></p>
+     <div>
+       <% if @sponsored_post.comments.length > 0 %>
+       <h3>Comments</h3>
+       <% end %>
+       
+        <% @sponsored_post.comments.each do |comment| %>
+          <div class="media">
+            <div class="media-body">
+                <p><%= comment.body %></p>
+                <small class="comment">
+                   Commented by <%= comment.user.name %>  <%= time_ago_in_words(comment.created_at) %> ago
+                   <% if user_is_authorized_for_comment?(comment) %>
+                     | <%= link_to "Delete", [@sponsored_post, comment], method: :delete %>
+                   <% end %>
+                </small>
+            </div>
+        </div>
+          
+        <% end %>
+
+       
+       
+     </div>
+     <% if current_user %>
+         <h4>Add a comment</h4>
+         <%= form_for [@sponsored_post, Comment.new] do |f| %>
+         <div class="form-group">
+            <%= f.label :body, class: 'sr-only' %>
+            <%= f.text_field :body, class: 'form-control', placeholder: "Enter a new comment" %>
+         </div>
+         <%= f.submit "Submit Comment", class: 'btn btn-default pull-right' %>
+         <% end %><br><br>
+    <% end %>
+         
+         
      <br>
      <% if user_is_authorized_for_topics? %>
      <%= link_to "Edit", edit_topic_sponsored_post_path(@sponsored_post.topic, @sponsored_post), class: 'btn btn-warning' %>

@@ -11,6 +11,12 @@ require 'marky_markov'
 markov = MarkyMarkov::TemporaryDictionary.new
 markov.parse_file "zenfile.txt"
 
+anon = User.create!(
+   name:     'Anonymous',
+   email:    'Anonymous@sink.sendgrid.net',
+   password: 'helloworld'
+ )
+
 admin = User.create!(
    name:     'Admin User',
    email:    'admin@sink.sendgrid.net',
@@ -45,13 +51,13 @@ admin = User.create!(
  
  Topic.create!(
      name:        "This is the name of the topic",
-     description: "A topic description goes here. The other topics were created automatically"
+     description: "A topic description goes here. Only admins can create topics. The other topics were magically created with the faker gem."
    )
  topics = Topic.all
 
 10.times do
    SponsoredPost.create!(
-     user:   users.sample,
+     user:   users.second,
      topic:  topics.sample,
      title:  Faker::Hipster.sentence,
      body:   markov.generate_5_sentences,
@@ -60,10 +66,10 @@ admin = User.create!(
  end
  
   SponsoredPost.create!(
-     user:   users.sample,
+     user:   users.second,
      topic:  topics.first,
      title:  "This is the title of a sponsored post",
-     body:   "The body of the post goes here",
+     body:   "The body of the post goes here. Only admins can make these.",
      price: rand(10...100)
    )
  
@@ -81,8 +87,8 @@ admin = User.create!(
   Post.create!(
      user:   users.sample,
      topic:  topics.first,
-     title:  "This is a regular post title",
-     body:   "Other posts are created using the faker gem"
+     title:  "This is a regular post title.",
+     body:   "Any member can make these."
    )
  
  posts = Post.all
@@ -91,28 +97,32 @@ admin = User.create!(
  
  100.times do
    Comment.create!(
+     user: users.sample,
      post: posts.sample,
      body: Faker::Friends.quote
    )
  end
  
  Comment.create!(
+     user: users.sample,
      post: posts.first,
-     body: "This is the first comment on a post!"
+     body: "This is the first comment on a post! Anyone can leave comments."
    )
  
 
  
  20.times do
    Comment.create!(
+     user: users.offset(1).sample,
      sponsored_post: sponsored_post.sample,
      body: Faker::Hacker.say_something_smart
    )
  end
  
   Comment.create!(
+     user: users.offset(1).sample,
      sponsored_post: sponsored_post.first,
-     body: "I'm the first comment on a sponsored post!"
+     body: "I'm the first comment on a sponsored post! These are restricted to members only."
    )
  
  50.times do
@@ -128,12 +138,6 @@ admin = User.create!(
  end
  
  advertisements = Advertisement.all
- 
- user = User.first
- user.update_attributes!(
-   email: 'mike@sink.sendgrid.net',
-   password: 'helloworld'
- )
  
  puts "Seed finished"
  puts "#{User.count} users created"
