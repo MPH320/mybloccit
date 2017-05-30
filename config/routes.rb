@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
     resources :sponsored_posts , except: [:index]
   end
+  
+  post 'users/confirm' => 'users#confirm'
   get 'about' => 'welcome#about'
   
   root 'welcome#index'
