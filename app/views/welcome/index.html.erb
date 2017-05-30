@@ -1,9 +1,18 @@
 <br>
  <div class="jumbotron">
    <h1>Bloccit</h1>
-   <p>Bloccit is a resource for sharing links with your friends!</p>
+   <p>Bloccit is a resource for sharing links with your friends.</p>
    <p>
+    
+    <% if current_user %>
+           Thanks for coming back <%= current_user.name %>!
+    <% else %>
+     <%= link_to "Sign In", new_session_path %> or
      <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary' %> today!
+    <% end %>
+    
+    
+     
    </p>
  </div>
  
