@@ -23,6 +23,18 @@ RSpec.describe User, type: :model do
      it "should have name and email attributes" do
        expect(user).to have_attributes(name: "Bloccit User", email: "user@sink.sendgrid.net")
      end
+     
+     it "responds to role" do
+       expect(user).to respond_to(:role)
+     end
+ 
+     it "responds to admin?" do
+       expect(user).to respond_to(:admin?)
+     end
+ 
+     it "responds to member?" do
+       expect(user).to respond_to(:member?)
+     end
    end
    
    describe "invalid user" do

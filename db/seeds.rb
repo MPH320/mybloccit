@@ -11,10 +11,24 @@ require 'marky_markov'
 markov = MarkyMarkov::TemporaryDictionary.new
 markov.parse_file "zenfile.txt"
 
+admin = User.create!(
+   name:     'Admin User',
+   email:    'admin@sink.sendgrid.net',
+   password: 'helloworld',
+   role:     'admin'
+ )
+ 
+ # Create a member
+ member = User.create!(
+   name:     'Member User',
+   email:    'member@sink.sendgrid.net',
+   password: 'helloworld'
+ )
+
 5.times do
    User.create!(
  # #3
-   name:     RandomData.random_name,
+   name:     Faker::GameOfThrones.character,
    email:    RandomData.random_email,
    password: RandomData.random_sentence
    )
