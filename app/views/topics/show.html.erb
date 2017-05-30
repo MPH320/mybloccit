@@ -2,14 +2,14 @@
  <div class="row">
    <div class="col-md-8">
      <p class="lead"><%= @topic.description %></p>
-     <% @topic.SponsoredPosts.each do |sponsored_post| %>
+     <% @topic.sponsored_posts.each do |sponsored_post| %>
        <div class="media">
          <div class="media-body">
            <h4 class="media-heading sub-titles">
              <%= link_to sponsored_post.title, topic_sponsored_post_path(@topic, sponsored_post) %> - Sponsored
            </h4>
            <small>
-             submitted <%= time_ago_in_words(sponsored_post.created_at) %> ago <br>
+             submitted <%= time_ago_in_words(sponsored_post.created_at) %> ago by <%= sponsored_post.user.name %> <br>
              <%= sponsored_post.comments.count %> Comments
            </small>
          </div>
@@ -22,7 +22,7 @@
              <%= link_to post.title, topic_post_path(@topic, post) %>
            </h4>
            <small>
-             submitted <%= time_ago_in_words(post.created_at) %> ago <br>
+             submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
              <%= post.comments.count %> Comments
            </small>
          </div>

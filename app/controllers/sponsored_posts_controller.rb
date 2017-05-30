@@ -2,6 +2,7 @@ include Faker
 
 class SponsoredPostsController  < ApplicationController
 
+ before_action :require_sign_in, except: :show
 
  def show
     @sponsored_post = SponsoredPost.find(params[:id])
@@ -14,11 +15,8 @@ class SponsoredPostsController  < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @sponsored_post = SponsoredPost.new
-    @sponsored_post.title = params[:sponsored_post][:title]
-    @sponsored_post.body  = params[:sponsored_post][:body]
-    @sponsored_post.price  = params[:sponsored_post][:price]
-    @sponsored_post.topic = @topic
+    @sponsored_post = @topic.sponsored_posts.build(sponsored_post_params)
+    @sponsored_post.user = current_user
 
     if @sponsored_post.save
       flash[:notice] = 'Sponsored Post was saved.'
@@ -35,9 +33,7 @@ class SponsoredPostsController  < ApplicationController
 
   def update
     @sponsored_post = SponsoredPost.find(params[:id])
-    @sponsored_post.title = params[:sponsored_post][:title]
-    @sponsored_post.body = params[:sponsored_post][:body]
-    @sponsored_post.price = params[:sponsored_post][:price]
+    @sponsored_post.assign_attributes(sponsored_post_params)
 
     if @sponsored_post.save
       flash[:notice] = 'Sponsored Post was updated.'
@@ -59,4 +55,9 @@ class SponsoredPostsController  < ApplicationController
       render :show
     end
   end
+  private
+ 
+   def sponsored_post_params
+     params.require(:sponsored_post).permit(:title, :body, :price)
+   end
 end

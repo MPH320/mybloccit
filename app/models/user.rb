@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
     
+    has_many :posts
+    has_many :sponsored_posts
+    
     before_save { 
          
          if name.present?
