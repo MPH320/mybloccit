@@ -75,6 +75,13 @@ admin = User.create!(
  
  sponsored_post = SponsoredPost.all
  
+ Post.create!(
+     user:   users.sample,
+     topic:  topics.first,
+     title:  "This is a regular post title.",
+     body:   "Any member can make these."
+   )
+ 
  50.times do
    Post.create!(
      user:   users.sample,
@@ -84,12 +91,7 @@ admin = User.create!(
    )
  end
  
-  Post.create!(
-     user:   users.sample,
-     topic:  topics.first,
-     title:  "This is a regular post title.",
-     body:   "Any member can make these."
-   )
+  
  
  posts = Post.all
  
