@@ -1,4 +1,5 @@
-include Faker
+require 'json'
+
 
 class PostsController < ApplicationController
 
@@ -8,7 +9,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @ad = Advertisement.all.sample
-    @image = Faker::Fillmurray.image
+    @image = Giphy.random
+    @image.to_json
   end
 
   def new

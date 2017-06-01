@@ -25,7 +25,6 @@
      <% end %>
      <br>
      
-     
      <div class="col-md-4">
      <h3>
        <%= pluralize(@post.points, 'point') %>
@@ -41,17 +40,16 @@
         <%= render partial: 'favorites/favorite', locals: { post: @post } %>
        <br>      <br>
      <% end %>
-     
+
      <br>
      <div class="ad">
       <a href="https://www.michelangelopereira.com">
-       <img class="murray" src="<%=  @image  %>">
-       
+       <img class="murray" src="<%=  @image.image_original_url  %>">
+     
          <p class="ad-text">&nbsp;<%=  @ad.title  %></p>
          <p class="ad-text">&nbsp;<%=  @ad.body  %> </p>
          <p class="ad-text">&nbsp;$<%=  @ad.price  %></p>
          <p class="ad-text">&nbsp;<%=  @ad.url  %> </p>
-        
          
        </a>
       </div>
