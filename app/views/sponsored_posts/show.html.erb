@@ -29,6 +29,13 @@
        
        
      </div>
+   
+     <% if current_user %>
+       <br>
+       <%= render partial: 'favorites/favoriteSP', locals: { sponsored_post: @sponsored_post } %>
+        <br>  <br>
+     <% end %>
+    
      <% if current_user %>
          <h4>Add a comment</h4>
          <%= form_for [@sponsored_post, Comment.new] do |f| %>
