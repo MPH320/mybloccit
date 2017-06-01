@@ -1,0 +1,8 @@
+New comment to "<%= @sponsored_post.title %>"
+ <%= "=" * (@sponsored_post.title.length + 12) %>
+ 
+ By: <%= @comment.user.name %>
+ 
+ <%= @comment.body %>
+ 
+ Visit online at: <%= topic_sponsored_post_url(@sponsored_post.topic, @sponsored_post, anchor: "comment-#{@comment.id}") %>
