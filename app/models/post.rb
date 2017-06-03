@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
     belongs_to :user
     has_many :comments, dependent: :destroy
     after_create :create_vote
+    after_create :create_favorite
     has_many :votes, dependent: :destroy
     has_many :favorites, dependent: :destroy
     default_scope { order('rank DESC') }
@@ -34,4 +35,15 @@ class Post < ActiveRecord::Base
     def create_vote
        user.votes.create(value: 1, post: self)
     end
+    
+    def create_favorite
+     favorites.create(post: self, user: user)
+     send_favorite_emails
+   end
+   
+   def send_favorite_emails
+     self.favorites.each do |favorite|
+       FavoriteMailer.new_post(favorite.user, self).deliver_now
+     end
+   end
 end
