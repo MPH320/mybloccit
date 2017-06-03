@@ -18,7 +18,7 @@
         <%= f.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter topic description" %>
     <% end %>
     <%= form_group_tag(topic.errors[:public]) do %>
-        <%= f.label :public, class: 'checkbox' do %>
+         <%= f.label :public, class: 'checkbox' do %>
         <%= f.check_box :public %> Public topic
     <% end %>
         <div class="form-group">
