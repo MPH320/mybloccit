@@ -43,6 +43,70 @@
 
      <br>
      <div class="ad">
+      <a href="http://michelangelopereira.com/">
+       <img class="murray" src="<%=  @image.image_original_url  %>">
+     
+         <p class="ad-text">&nbsp;<%=  @ad.title  %></p>
+         <p class="ad-text">&nbsp;<%=  @ad.body  %> </p>
+         <p class="ad-text">&nbsp;$<%=  @ad.price  %></p>
+         <p class="ad-text">&nbsp;<%=  @ad.url  %> </p>
+         
+       </a>
+      </div>
+      <br><br>
+   </div>
+   
+   
+   
+ </div>
+     
+      
+   </div>
+ </div><div>
+<%= render partial: 'votes/voter', locals: { post: @post } %>
+<h1 class="titles"><%= @post.title %></h1> 
+   <small>
+     submitted <%= time_ago_in_words(@post.created_at) %> ago by <%= @post.user.name %><br><br>
+   </small>
+<div>
+ <br>
+ <div class="row">
+   <div class="col-md-8">
+     <p class="sub-titles"><%= @post.body %></p>
+     <div>
+      <% if @post.comments.length > 0 %>
+       <h3>Comments</h3>
+       <% end %>
+       <%= render @post.comments %>
+     </div>
+
+       <%= render 'comments/form', comment: Comment.new, post: @post %>
+      
+     <br>
+     <% if user_is_authorized_for_post?(@post) %>
+      <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-warning' %>
+      <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
+     <% end %>
+     <br>
+     
+     <div class="col-md-4">
+     <h3>
+       <%= pluralize(@post.points, 'point') %>
+       <div>
+         <small>
+           <%= pluralize(@post.up_votes, 'up vote') %>,
+           <%= pluralize(@post.down_votes, 'down vote') %>
+         </small>
+       </div>
+     </h3>
+     <% if current_user %>
+       <br>      
+        <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+       <br>      <br>
+     <% end %>
+
+     <br>
+     <div class="ad">
       <a href="http://mikesportfolio.surge.sh/">
        <img class="murray" src="<%=  @image.image_original_url  %>">
      
